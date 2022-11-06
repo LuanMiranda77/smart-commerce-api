@@ -91,8 +91,8 @@ public class ConfigAmbienteDev {
 		user1.setEmail("agilityecommerce@gmail.com");
 		user1.setPassword("123456");
 		user1.setNome("ADMIN");
-		user1.setRole(Roles.MASTER);
-		user1.setStatus(EstatusUsuario.ATIVO);
+		user1.setRoles("01-02-03");
+		user1.setStatus("S");
 //		new BCryptPasswordEncoder().encode("123456")
 		users.add(user1);
 		user = userRepository.save(user1);
@@ -101,9 +101,9 @@ public class ConfigAmbienteDev {
 		user.setEmail("luanprof30@gmail.com");
 		user.setPassword("123456");
 		user.setNome("LUAN MIRANDA");
-		user.setRole(Roles.CLIENTE);
+		user.setRoles("1-2-3-4");
 //		new BCryptPasswordEncoder().encode("123456")
-		user.setStatus(EstatusUsuario.ATIVO);
+		user.setStatus("S");
 		users.add(user);
 		user = userRepository.save(user);
 

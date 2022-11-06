@@ -23,7 +23,7 @@ import lombok.Data;
 @Entity
 @Data
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Empresa {
+public class Estabelecimento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

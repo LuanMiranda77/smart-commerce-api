@@ -5,11 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.api.domain.Cliente;
-import com.api.domain.Empresa;
+import com.api.domain.Estabelecimento;
 
 //@autor Jadson Feitosa #AE-42
 
 @Repository
-public interface EmpresaRepository extends JpaRepository<Empresa, Long>{
+public interface EmpresaRepository extends JpaRepository<Estabelecimento, Long>{
 
 }

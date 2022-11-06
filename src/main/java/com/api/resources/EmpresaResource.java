@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.domain.CredencialMercadoLivre;
 import com.api.domain.CredencialMercadoPago;
-import com.api.domain.Empresa;
+import com.api.domain.Estabelecimento;
 import com.api.repository.EmpresaRepository;
 import com.api.services.EmpresaService;
 
@@ -30,7 +30,7 @@ import com.api.services.EmpresaService;
 
 @RestController
 @RequestMapping("/api/empresa")
-public class EmpresaResource implements ResourceBase<Empresa, Long>{
+public class EmpresaResource implements ResourceBase<Estabelecimento, Long>{
 	
 	@Autowired
 	private EmpresaService empresaService;
@@ -41,8 +41,8 @@ public class EmpresaResource implements ResourceBase<Empresa, Long>{
 //	Salvar Empresa
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Empresa> save(@Valid @RequestBody Empresa pEntity, HttpServletResponse response) {
-		Empresa EmpresaSalvo = null;
+	public ResponseEntity<Estabelecimento> save(@Valid @RequestBody Estabelecimento pEntity, HttpServletResponse response) {
+		Estabelecimento EmpresaSalvo = null;
 		EmpresaSalvo = empresaService.save(pEntity);
 		return ResponseEntity.status(HttpStatus.CREATED).body(EmpresaSalvo);
 	}
@@ -65,8 +65,8 @@ public class EmpresaResource implements ResourceBase<Empresa, Long>{
 
 //	Atualizar entidade 
 	@PutMapping("/{pID}")
-	public ResponseEntity<Empresa> update(@Valid @PathVariable Long pID, @RequestBody Empresa pEntity) {
-		Empresa EmpresaSalvo = empresaService.update(pID, pEntity);
+	public ResponseEntity<Estabelecimento> update(@Valid @PathVariable Long pID, @RequestBody Estabelecimento pEntity) {
+		Estabelecimento EmpresaSalvo = empresaService.update(pID, pEntity);
 		return ResponseEntity.ok(EmpresaSalvo);
 	}
 
@@ -80,7 +80,7 @@ public class EmpresaResource implements ResourceBase<Empresa, Long>{
 //	Filtro por ID
 	@GetMapping("/{pID}")
 	@Override
-	public ResponseEntity<Empresa> findById(Long pID) {
+	public ResponseEntity<Estabelecimento> findById(Long pID) {
 		// TODO Auto-generated method stub
 		return ResponseEntity.ok(empresaRepository.findById(pID).get());
 	}
@@ -98,17 +98,17 @@ public class EmpresaResource implements ResourceBase<Empresa, Long>{
 	
 	@PostMapping("/deleteall")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteAll( @RequestBody List<Empresa> pList) {
+	public void deleteAll( @RequestBody List<Estabelecimento> pList) {
 		empresaRepository.deleteAll(pList);
 	}
 
 	@GetMapping
-	public List<Empresa> findAllList() {
+	public List<Estabelecimento> findAllList() {
 		return empresaRepository.findAll();
 	}
 
 	@Override
-	public Page<Empresa> findAllPage(Empresa pFilter, Pageable pPage) {
+	public Page<Estabelecimento> findAllPage(Estabelecimento pFilter, Pageable pPage) {
 		// TODO Auto-generated method stub
 		return null;
 	}

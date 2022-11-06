@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.domain.Pedido;
 import com.api.domain.Usuario;
+import com.api.domain.TO.UserLoginTO;
 import com.api.domain.enuns.EstatusPedido;
 import com.api.domain.enuns.EstatusUsuario;
 import com.api.repository.UsuarioRepository;
@@ -42,7 +43,7 @@ public class UsuarioResource implements ResourceBase<Usuario, Long> {
 	private UsuarioRepository usuarioRepository;
 	
 	@PostMapping("/login")
-	public ResponseEntity<Usuario> login(@RequestBody Usuario pEntity, HttpServletResponse response){
+	public ResponseEntity<Usuario> login(@RequestBody UserLoginTO pEntity, HttpServletResponse response){
 		Usuario userSalvo = usuarioRepository.findByEmail(pEntity.getEmail());
 		
 		if(userSalvo != null) {
