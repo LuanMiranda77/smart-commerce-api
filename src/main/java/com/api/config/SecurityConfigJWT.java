@@ -21,20 +21,20 @@ public class SecurityConfigJWT extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.authorizeRequests()
-			.antMatchers(HttpMethod.GET,"api/home").permitAll()
-			.antMatchers(HttpMethod.POST,"api/cliente").permitAll()
-			.antMatchers(HttpMethod.POST, "/tokken").permitAll()
+//			.antMatchers(HttpMethod.GET,"api/home").permitAll()
+//			.antMatchers(HttpMethod.POST,"api/cliente").permitAll()
+			.antMatchers(HttpMethod.POST, "/token").permitAll()
 			.anyRequest().authenticated()
 			.and().cors()
 			.and().csrf().disable()
 			
 			// filtra requisições de login
-			.addFilterBefore(new JWTLoginFilter("/tokken", authenticationManager()),
+			.addFilterBefore(new JWTLoginFilter("/token", authenticationManager()),
 	                UsernamePasswordAuthenticationFilter.class)
 			// filtra requisições de login
-			.addFilterBefore(new JWTLoginFilter("api/cliente", authenticationManager()),
-				                UsernamePasswordAuthenticationFilter.class)
-			
+//			.addFilterBefore(new JWTLoginFilter("api/cliente", authenticationManager()),
+//				                UsernamePasswordAuthenticationFilter.class)
+//			
 			// filtra outras requisições para verificar a presença do JWT no header
 			.addFilterBefore(new JWTAuthenticationFilter(),
 	                UsernamePasswordAuthenticationFilter.class);
@@ -46,7 +46,7 @@ public class SecurityConfigJWT extends WebSecurityConfigurerAdapter{
 		
 		auth.inMemoryAuthentication()
 			.withUser("admin")
-			.password("{noop}Ads%$#@!Ads")
+			.password("{noop}7sir5Q@BVUXVU@qo")
 			.roles("ROEL_ADMIN");
 		}
 

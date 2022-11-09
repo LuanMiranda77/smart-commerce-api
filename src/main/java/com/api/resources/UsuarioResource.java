@@ -49,7 +49,7 @@ public class UsuarioResource implements ResourceBase<Usuario, Long> {
 		if(userSalvo != null) {
 			if(userSalvo.getEmail().equals(pEntity.getEmail()) 
 					&& userSalvo.getPassword().equals(pEntity.getPassword())) {
-				
+				userSalvo.setPassword("");
 				return ResponseEntity.status(HttpStatus.ACCEPTED).body(userSalvo);
 				
 			}else {
