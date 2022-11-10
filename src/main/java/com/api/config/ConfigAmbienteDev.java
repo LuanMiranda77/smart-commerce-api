@@ -104,6 +104,7 @@ public class ConfigAmbienteDev {
 		user.setRoles("1-2-3-4");
 //		new BCryptPasswordEncoder().encode("123456")
 		user.setStatus("S");
+		user.setCargo("M");
 		users.add(user);
 		user = userRepository.save(user);
 

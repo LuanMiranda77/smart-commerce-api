@@ -73,7 +73,7 @@ public class UsuarioResource implements ResourceBase<Usuario, Long> {
 //	--ADD --Luan Miranda - AE-10---------------------------------------------
 	@PostMapping("/recuperasenha")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public ResponseEntity<Boolean> recuperaSenha(@RequestBody Usuario pEntity, HttpServletResponse response) {
+	public ResponseEntity<Boolean> recuperaSenha(@RequestBody UserLoginTO pEntity, HttpServletResponse response) {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(usuarioService.recuperaSenha(pEntity.getEmail()));
 	}
 	

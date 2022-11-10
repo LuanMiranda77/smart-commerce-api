@@ -22,7 +22,7 @@ public class SecurityConfigJWT extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.authorizeRequests()
 //			.antMatchers(HttpMethod.GET,"api/home").permitAll()
-//			.antMatchers(HttpMethod.POST,"api/cliente").permitAll()
+			.antMatchers(HttpMethod.POST,"/api/usuario/recuperasenha").permitAll()
 			.antMatchers(HttpMethod.POST, "/token").permitAll()
 			.anyRequest().authenticated()
 			.and().cors()
@@ -32,7 +32,7 @@ public class SecurityConfigJWT extends WebSecurityConfigurerAdapter{
 			.addFilterBefore(new JWTLoginFilter("/token", authenticationManager()),
 	                UsernamePasswordAuthenticationFilter.class)
 			// filtra requisições de login
-//			.addFilterBefore(new JWTLoginFilter("api/cliente", authenticationManager()),
+//			.addFilterBefore(new JWTLoginFilter("/api/usuario", authenticationManager()),
 //				                UsernamePasswordAuthenticationFilter.class)
 //			
 			// filtra outras requisições para verificar a presença do JWT no header
