@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.api.domain.Usuario;
-import com.api.domain.enuns.EstatusUsuario;
+import com.api.domain.enuns.StatusUsuario;
 
 //@autor Jadson Feitosa #AE-40
 
@@ -23,5 +23,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query("Update Usuario user SET user.status =:status where user.id =:id")
-	public void updateStatus(@Param("id") Long id, @Param("status") EstatusUsuario estatus);
+	public void updateStatus(@Param("id") Long id, @Param("status") StatusUsuario status);
 }

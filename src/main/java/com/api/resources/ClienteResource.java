@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.domain.Cliente;
 import com.api.domain.Usuario;
-import com.api.domain.enuns.EstatusUsuario;
+import com.api.domain.enuns.StatusUsuario;
 import com.api.domain.enuns.TipoCliente;
 import com.api.repository.ClienteRepository;
 import com.api.repository.UsuarioRepository;

@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +20,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.api.domain.enuns.StatusUsuario;
 import com.api.utils.UtilsHorasData;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -58,8 +61,8 @@ public class Usuario {
 	private Date acesso = new Date();
 	
 	@NotNull
-	@Size(max=1)
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private StatusUsuario status;
 	
 //	@JsonIgnore
 	@NotBlank

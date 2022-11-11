@@ -24,7 +24,7 @@ import com.api.domain.Pedido;
 import com.api.domain.Usuario;
 import com.api.domain.TO.UserLoginTO;
 import com.api.domain.enuns.EstatusPedido;
-import com.api.domain.enuns.EstatusUsuario;
+import com.api.domain.enuns.StatusUsuario;
 import com.api.repository.UsuarioRepository;
 import com.api.resources.exception.LoginException;
 import com.api.services.UsuarioService;
@@ -94,7 +94,7 @@ public class UsuarioResource implements ResourceBase<Usuario, Long> {
 	
 //	Atualizar status
 	@PutMapping("/status/{id}/{status}")
-	public ResponseEntity<Usuario> updateStatus(@PathVariable Long id, @PathVariable EstatusUsuario status) {
+	public ResponseEntity<Usuario> updateStatus(@PathVariable Long id, @PathVariable StatusUsuario status) {
 		usuarioRepository.updateStatus(id,status);
 		return ResponseEntity.ok(null);
 	}

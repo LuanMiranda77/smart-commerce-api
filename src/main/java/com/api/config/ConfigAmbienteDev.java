@@ -27,7 +27,7 @@ import com.api.domain.Produto;
 import com.api.domain.Usuario;
 import com.api.domain.enuns.EstatusPagamento;
 import com.api.domain.enuns.EstatusPedido;
-import com.api.domain.enuns.EstatusUsuario;
+import com.api.domain.enuns.StatusUsuario;
 import com.api.domain.enuns.Roles;
 import com.api.domain.enuns.Sexo;
 import com.api.domain.enuns.TipoCliente;
@@ -89,10 +89,12 @@ public class ConfigAmbienteDev {
 
 		Usuario user1 = new Usuario();
 		user1.setEmail("agilityecommerce@gmail.com");
+		user1.setCpf("40601032845");
+		user1.setCelular("83996386694");;
 		user1.setPassword("123456");
 		user1.setNome("ADMIN");
 		user1.setRoles("01-02-03");
-		user1.setStatus("S");
+		user1.setStatus(StatusUsuario.S);
 //		new BCryptPasswordEncoder().encode("123456")
 		users.add(user1);
 		user = userRepository.save(user1);
@@ -103,7 +105,7 @@ public class ConfigAmbienteDev {
 		user.setNome("LUAN MIRANDA");
 		user.setRoles("1-2-3-4");
 //		new BCryptPasswordEncoder().encode("123456")
-		user.setStatus("S");
+		user.setStatus(StatusUsuario.S);
 		user.setCargo("M");
 		users.add(user);
 		user = userRepository.save(user);
