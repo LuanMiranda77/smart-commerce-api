@@ -19,6 +19,7 @@ import com.api.domain.CredencialMercadoLivre;
 import com.api.domain.CredencialMercadoPago;
 import com.api.domain.Endereco;
 import com.api.domain.EnderecoEntrega;
+import com.api.domain.Estabelecimento;
 import com.api.domain.ImagemProduto;
 import com.api.domain.ItemPedido;
 import com.api.domain.Pagamento;
@@ -27,6 +28,7 @@ import com.api.domain.Produto;
 import com.api.domain.Usuario;
 import com.api.domain.enuns.EstatusPagamento;
 import com.api.domain.enuns.EstatusPedido;
+import com.api.domain.enuns.Regime;
 import com.api.domain.enuns.StatusUsuario;
 import com.api.domain.enuns.Roles;
 import com.api.domain.enuns.Sexo;
@@ -35,6 +37,7 @@ import com.api.domain.enuns.TipoPagamento;
 import com.api.domain.enuns.UF;
 import com.api.repository.CategoriaRepository;
 import com.api.repository.ClienteRepository;
+import com.api.repository.EstabelecimentoRepository;
 import com.api.repository.ImagemProdutoRepository;
 import com.api.repository.PagamentoRepository;
 import com.api.repository.PedidoRepository;
@@ -42,6 +45,7 @@ import com.api.repository.ProdutoRepository;
 import com.api.repository.UsuarioRepository;
 import com.api.services.EmpresaService;
 import com.api.services.PedidoService;
+import com.api.services.UsuarioService;
 import com.api.utils.UtilsHorasData;
 
 @Configuration
@@ -66,7 +70,11 @@ public class ConfigAmbienteDev {
 	@Autowired
 	ClienteRepository clienteRepository;
 	@Autowired
+	EstabelecimentoRepository estabelecimentoRepository;
+	@Autowired
 	PedidoService pedidoService;
+	@Autowired
+	UsuarioService userService;
 	@Autowired
 	EmpresaService empresaService;
 
@@ -96,7 +104,9 @@ public class ConfigAmbienteDev {
 		user1.setRoles("01-02-03");
 		user1.setStatus(StatusUsuario.S);
 //		new BCryptPasswordEncoder().encode("123456")
+		user1.setCargo("E");
 		users.add(user1);
+		
 		user = userRepository.save(user1);
 
 		user = new Usuario();
@@ -139,6 +149,8 @@ public class ConfigAmbienteDev {
 		
 		CredencialMercadoPago mercadoPago = new CredencialMercadoPago(null, "TEST-c7bc4be8-8d01-4ac6-9b7e-ca99d41876b9","2128718904902939","V7OLfmpG4XUzYnLhYmDYnK4MO6DvNqdm", "TEST-2128718904902939-011402-df2ae4462726e85ccec8e03b48838f64-669091157",  "S");
 		empresaService.saveCredencialMercadoPago(mercadoPago);
+		
+		ArrayList<Estabelecimento> estabelecimentos = new ArrayList<Estabelecimento>();
 
 		for (int i = 0; i < quantDeLoop; i++) {
 			categoria = new Categoria(i + 1l, "categoria-test-" + (i+1), "MLB271599", "MLB442408");
@@ -243,12 +255,55 @@ public class ConfigAmbienteDev {
 					itens.getQuantidadeVendida() + itens2.getQuantidadeVendida() + itens3.getQuantidadeVendida()))));
 
 			pedidos.add(pedido);
+			
+			Estabelecimento estabelecimento = new Estabelecimento();
+			estabelecimento.setInstEstadual(null);
+			estabelecimento.setInstMunicipal(null);
+			estabelecimento.setRazao("Razão final do teste"+i+1);
+			estabelecimento.setNome("Estabelecimento teste-"+i+1);
+			estabelecimento.setCnpj("53418110000152");
+			estabelecimento.setLogradouro("endereço teste"+i+1);
+			estabelecimento.setCep("58500000");
+			estabelecimento.setCidade("cidade teste"+i+1);
+			estabelecimento.setUf(UF.PB);
+			estabelecimento.setEmail("teste@gmail.com");
+			estabelecimento.setCelular1("8395955999955");
+			if(i==0) {
+				estabelecimento.setMatrizId(null);
+			}else if(i==1) {
+				estabelecimento.setMatrizId("0");
+			}else {
+				estabelecimento.setMatrizId("2");
+			}
+			estabelecimento.setRegime(Regime.SN);
+			
+			estabelecimentos.add(estabelecimento);
 
 		}
 
 // 		salvando dados			
 		categoriaRepository.saveAll(categorias);
 		produtoRepository.saveAll(produtos);
+		estabelecimentoRepository.saveAll(estabelecimentos);
+		
+		Estabelecimento est = new Estabelecimento();
+		est.setId(2l);
+		user1.setEstabelecimento(est);
+		userService.save(user1);
+		
+		user1 = new Usuario();
+		user1.setEmail("teste@gmail.com");
+		user1.setCpf("40601032845");
+		user1.setCelular("83996386694");;
+		user1.setPassword("123456");
+		user1.setNome("MARIA");
+		user1.setRoles("01-02-03");
+		user1.setStatus(StatusUsuario.S);
+//		new BCryptPasswordEncoder().encode("123456")
+		user1.setEstabelecimento(est);
+		user1.setCargo("C");
+		userService.save(user1);
+		
 		pedidos.forEach(e -> pedidoService.save(e));
 
 	}

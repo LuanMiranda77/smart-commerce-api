@@ -38,7 +38,7 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String codigo;
+	private Long codigo;
 	
 	private String cpf;
 	
@@ -78,8 +78,6 @@ public class Usuario {
 	
 	@OneToOne
 	private Estabelecimento estabelecimento;
-	
-	
 
 	@PrePersist
 	public void dataInicial() {

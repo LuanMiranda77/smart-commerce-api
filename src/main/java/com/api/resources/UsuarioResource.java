@@ -120,7 +120,14 @@ public class UsuarioResource implements ResourceBase<Usuario, Long> {
 		return usuarioRepository.findAll();
 	}
 
+	@GetMapping("/estabelecimento/{pID}")
+	public List<Usuario> findByEstabelecimento(@PathVariable Long pID) {
+		return usuarioRepository.findByEstabelecimento(pID);
+	}
+	
+	@Override
 	public Page<Usuario> findAllPage(Usuario pFilter, Pageable pPage) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

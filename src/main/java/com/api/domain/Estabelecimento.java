@@ -6,12 +6,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.api.domain.enuns.Regime;
 import com.api.domain.enuns.UF;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.Data;
 
@@ -29,28 +29,27 @@ public class Estabelecimento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
-	@Size( min=18, max = 18)
+	@Size( min=14, max = 14)
 	private String cnpj;
+	
+	@Size( min=11, max = 11)
+	private String cpf;
 	
 	private String instEstadual;
 	
 	private String instMunicipal;
 	
+	@NotNull
+	private String razao;
 	
-	private String razaoSocial;
 	
-	
-	private String nomeFantasia;
+	private String nome;
 	
 	
     private String logradouro;
 	
 	
 	private String numero;
-	
-	
-	private String complemento;
 	
 	
 	private String bairro;
@@ -64,15 +63,22 @@ public class Estabelecimento {
 	@Enumerated(EnumType.STRING)
 	private UF uf;
 	
+	private String logo;
+	
+	private String codIbge;
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private Regime regime;
 //	contatos--------------------------------------
 	
-	
-	private String emailPrincipal;
-	
-	
-	private String emailSegundario;
+	@NotNull
+	private String email;
 	
 	
+	private String email2;
+	
+	@NotNull
 	private String celular1;
 	
 	
@@ -80,6 +86,9 @@ public class Estabelecimento {
 	
 	
 	private String foneFixo;
+	
+//	se for igual a zero é porque tem filiais se for null é porque não existe filial
+	private String matrizId;
 	
 	
 	
