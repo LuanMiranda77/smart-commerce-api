@@ -50,15 +50,15 @@ public class Usuario {
 	
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataCriacao = new Date();
+	private Date dataCriacao;
 	
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataAtualizacao = new Date();
+	private Date dataAtualizacao;
 	
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date acesso = new Date();
+	private Date acesso;
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -78,6 +78,10 @@ public class Usuario {
 	
 	@OneToOne
 	private Estabelecimento estabelecimento;
+	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date sincTemp;
 
 	@PrePersist
 	public void dataInicial() {

@@ -20,11 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.domain.Estabelecimento;
 import com.api.domain.Pedido;
 import com.api.domain.Usuario;
 import com.api.domain.TO.UserLoginTO;
+import com.api.domain.TO.UsuarioTO;
 import com.api.domain.enuns.EstatusPedido;
 import com.api.domain.enuns.StatusUsuario;
+import com.api.repository.EstabelecimentoRepository;
 import com.api.repository.UsuarioRepository;
 import com.api.resources.exception.LoginException;
 import com.api.services.UsuarioService;
@@ -41,6 +44,9 @@ public class UsuarioResource implements ResourceBase<Usuario, Long> {
 	
 	@Autowired 
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired 
+	private EstabelecimentoRepository estabelecimentoRepository;
 	
 	@PostMapping("/login")
 	public ResponseEntity<Usuario> login(@RequestBody UserLoginTO pEntity, HttpServletResponse response){
@@ -64,8 +70,11 @@ public class UsuarioResource implements ResourceBase<Usuario, Long> {
 //	Salvar Usuario
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Usuario> save(@Valid @RequestBody Usuario pEntity, HttpServletResponse response) {
-		Usuario usuarioSalvo = usuarioService.save(pEntity);
+	public ResponseEntity<Usuario> save(@Valid @RequestBody UsuarioTO pEntity, HttpServletResponse response) {
+		Estabelecimento estabelecimento = estabelecimentoRepository.getById(pEntity.getEstabelecimento());
+		Usuario user = pEntity.converteParaEntidadeSemEstabelecimento(pEntity);
+		user.setEstabelecimento(estabelecimento);
+		Usuario usuarioSalvo = usuarioService.save(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(usuarioSalvo);
 	}
 	
@@ -127,6 +136,13 @@ public class UsuarioResource implements ResourceBase<Usuario, Long> {
 	
 	@Override
 	public Page<Usuario> findAllPage(Usuario pFilter, Pageable pPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public ResponseEntity<Usuario> save(@Valid Usuario pEntity, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		return null;
 	}

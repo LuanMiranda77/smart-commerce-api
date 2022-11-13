@@ -28,17 +28,20 @@ public class UsuarioService {
 	public Usuario save(Usuario pEntity) {
 		Usuario userSalvo =null;
 		
-//		if(usuarioRepository.existsByEmail(pEntity.getEmail())) {
-//			throw new UsuarioExistException();
-//		}
-		
-		Long codigo = usuarioRepository.findMaxCodigoByEstabelecimento(pEntity.getEstabelecimento().getId());
-		if(codigo==null) {
-			codigo=1l;
-		}else {
-			codigo+=1l;
+		if(usuarioRepository.existsByEmail(pEntity.getEmail())) {
+			throw new UsuarioExistException();
 		}
-		pEntity.setCodigo(codigo);
+		
+		if(!pEntity.getCargo().equals("M") || !pEntity.getCargo().equals("R")) {
+			Long codigo = usuarioRepository.findMaxCodigoByEstabelecimento(pEntity.getEstabelecimento().getId());
+			if(codigo==null) {
+				codigo=1l;
+			}else {
+				codigo+=1l;
+			}
+			pEntity.setCodigo(codigo);
+		}
+		
 		userSalvo = usuarioRepository.save(pEntity);
 		userSalvo.setPassword(null);
 		

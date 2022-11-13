@@ -97,16 +97,14 @@ public class ConfigAmbienteDev {
 
 		Usuario user1 = new Usuario();
 		user1.setEmail("agilityecommerce@gmail.com");
-		user1.setCpf("40601032845");
+		user1.setCpf("39926782027");
 		user1.setCelular("83996386694");;
 		user1.setPassword("123456");
 		user1.setNome("ADMIN");
-		user1.setRoles("01-02-03");
+		user1.setRoles("1-2-3");
 		user1.setStatus(StatusUsuario.S);
 //		new BCryptPasswordEncoder().encode("123456")
-		user1.setCargo("E");
-		users.add(user1);
-		
+		user1.setCargo("R");
 		user = userRepository.save(user1);
 
 		user = new Usuario();
@@ -117,7 +115,6 @@ public class ConfigAmbienteDev {
 //		new BCryptPasswordEncoder().encode("123456")
 		user.setStatus(StatusUsuario.S);
 		user.setCargo("M");
-		users.add(user);
 		user = userRepository.save(user);
 
 		Cliente cliente = new Cliente();
@@ -153,6 +150,47 @@ public class ConfigAmbienteDev {
 		ArrayList<Estabelecimento> estabelecimentos = new ArrayList<Estabelecimento>();
 
 		for (int i = 0; i < quantDeLoop; i++) {
+			
+			Estabelecimento estabelecimento = new Estabelecimento();
+			estabelecimento.setInstEstadual(null);
+			estabelecimento.setInstMunicipal(null);
+			estabelecimento.setRazao("Razão final do teste"+i);
+			estabelecimento.setNome("Estabelecimento teste-"+i);
+			estabelecimento.setCnpj("53418110000152");
+			estabelecimento.setLogradouro("endereço teste"+i);
+			estabelecimento.setCep("58500000");
+			estabelecimento.setCidade("cidade teste"+i);
+			estabelecimento.setUf(UF.PB);
+			estabelecimento.setEmail("teste@gmail.com");
+			estabelecimento.setCelular1("8395955999955");
+			if(i==0) {
+				estabelecimento.setMatrizId(null);
+			}else if(i==1) {
+				estabelecimento.setMatrizId("0");
+			}else {
+				estabelecimento.setMatrizId("2");
+			}
+			estabelecimento.setRegime(Regime.SN);
+			
+			estabelecimentos.add(estabelecimento);
+			
+			Usuario user3 = new Usuario();
+			user3.setEmail("teste"+i+"@gmail.com");
+			user3.setCpf("39926782027");
+			user3.setCelular("83996386694");;
+			user3.setPassword("123456");
+			user3.setNome("TESTE USER"+i);
+			user3.setRoles("1-2-3");
+			user3.setStatus(StatusUsuario.S);
+//			new BCryptPasswordEncoder().encode("123456")
+			user3.setCargo(i==1?"G":i==2?"C":"E");
+			estabelecimento = new Estabelecimento();
+			estabelecimento.setId(1L);
+			user3.setEstabelecimento(estabelecimento);
+			
+			users.add(user3);
+//			user = userRepository.save(user3);
+			
 			categoria = new Categoria(i + 1l, "categoria-test-" + (i+1), "MLB271599", "MLB442408");
 			categorias.add(categoria);
 
@@ -256,54 +294,14 @@ public class ConfigAmbienteDev {
 
 			pedidos.add(pedido);
 			
-			Estabelecimento estabelecimento = new Estabelecimento();
-			estabelecimento.setInstEstadual(null);
-			estabelecimento.setInstMunicipal(null);
-			estabelecimento.setRazao("Razão final do teste"+i+1);
-			estabelecimento.setNome("Estabelecimento teste-"+i+1);
-			estabelecimento.setCnpj("53418110000152");
-			estabelecimento.setLogradouro("endereço teste"+i+1);
-			estabelecimento.setCep("58500000");
-			estabelecimento.setCidade("cidade teste"+i+1);
-			estabelecimento.setUf(UF.PB);
-			estabelecimento.setEmail("teste@gmail.com");
-			estabelecimento.setCelular1("8395955999955");
-			if(i==0) {
-				estabelecimento.setMatrizId(null);
-			}else if(i==1) {
-				estabelecimento.setMatrizId("0");
-			}else {
-				estabelecimento.setMatrizId("2");
-			}
-			estabelecimento.setRegime(Regime.SN);
-			
-			estabelecimentos.add(estabelecimento);
 
 		}
 
-// 		salvando dados			
+// 		salvando dados		
+		estabelecimentoRepository.saveAll(estabelecimentos);
 		categoriaRepository.saveAll(categorias);
 		produtoRepository.saveAll(produtos);
-		estabelecimentoRepository.saveAll(estabelecimentos);
-		
-		Estabelecimento est = new Estabelecimento();
-		est.setId(2l);
-		user1.setEstabelecimento(est);
-		userService.save(user1);
-		
-		user1 = new Usuario();
-		user1.setEmail("teste@gmail.com");
-		user1.setCpf("40601032845");
-		user1.setCelular("83996386694");;
-		user1.setPassword("123456");
-		user1.setNome("MARIA");
-		user1.setRoles("01-02-03");
-		user1.setStatus(StatusUsuario.S);
-//		new BCryptPasswordEncoder().encode("123456")
-		user1.setEstabelecimento(est);
-		user1.setCargo("C");
-		userService.save(user1);
-		
+		userRepository.saveAll(users);
 		pedidos.forEach(e -> pedidoService.save(e));
 
 	}
