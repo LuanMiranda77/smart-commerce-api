@@ -33,6 +33,7 @@ public class UsuarioTO implements Serializable{
 	private String password;
 	private String roles;
 	private Long estabelecimento;
+//	private Date sincTemp;
 	
 	public UsuarioTO() {
 		super();
@@ -49,6 +50,7 @@ public class UsuarioTO implements Serializable{
 		this.dataAtualizacao = dataAtualizacao;
 		this.status = status;
 		this.roles = roles;
+		
 	}
 	
 	

@@ -23,6 +23,7 @@ import javax.validation.constraints.Size;
 import com.api.domain.enuns.StatusUsuario;
 import com.api.utils.UtilsHorasData;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
@@ -76,9 +77,11 @@ public class Usuario {
 	
 	private String roles;
 	
+	
 	@OneToOne
 	private Estabelecimento estabelecimento;
 	
+	@JsonIgnore
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date sincTemp;
@@ -86,11 +89,13 @@ public class Usuario {
 	@PrePersist
 	public void dataInicial() {
 		this.dataCriacao = UtilsHorasData.subtrair(new Date(), 3);
+		this.sincTemp = UtilsHorasData.subtrair(new Date(), 3);
 	}
 	
 	@PreUpdate
 	public void dataAtualizacao() {
 		this.dataAtualizacao = UtilsHorasData.subtrair(new Date(), 3);
+		this.sincTemp = UtilsHorasData.subtrair(new Date(), 3);
 	}
 	
 	

@@ -86,6 +86,8 @@ public class ConfigAmbienteDev {
 		List<Usuario> users = new ArrayList<>();
 		List<Categoria> categorias = new ArrayList<>();
 		List<Pedido> pedidos = new ArrayList<>();
+		List<Estabelecimento> estabelecimentos = new ArrayList<>();
+		List<Endereco> enderecos = new ArrayList<>();
 
 // 		setando dados dos usuarios		
 		Usuario user;
@@ -94,6 +96,21 @@ public class ConfigAmbienteDev {
 		Pedido pedido = null;
 
 		Random gerador = new Random();
+		
+		Estabelecimento estabelecimento = new Estabelecimento();
+		estabelecimento.setInstEstadual(null);
+		estabelecimento.setInstMunicipal(null);
+		estabelecimento.setRazao("Smart commerce");
+		estabelecimento.setNome("Smart commerce");
+		estabelecimento.setCnpj("43897537000109");
+		estabelecimento.setLogradouro("endereço teste");
+		estabelecimento.setCep("58500000");
+		estabelecimento.setCidade("cidade teste");
+		estabelecimento.setUf(UF.PB);
+		estabelecimento.setEmail("smartcommerce@gmail.com");
+		estabelecimento.setCelular1("83996386694");
+		estabelecimento.setRegime(Regime.ME);
+		estabelecimentoRepository.save(estabelecimento);
 
 		Usuario user1 = new Usuario();
 		user1.setEmail("agilityecommerce@gmail.com");
@@ -134,7 +151,7 @@ public class ConfigAmbienteDev {
 		endereco.setUf(UF.PB);
 		endereco.setPadrao("S");
 
-		List<Endereco> enderecos = new ArrayList<Endereco>();
+		
 		enderecos.add(endereco);
 
 		cliente.setEnderecos(enderecos);
@@ -147,11 +164,11 @@ public class ConfigAmbienteDev {
 		CredencialMercadoPago mercadoPago = new CredencialMercadoPago(null, "TEST-c7bc4be8-8d01-4ac6-9b7e-ca99d41876b9","2128718904902939","V7OLfmpG4XUzYnLhYmDYnK4MO6DvNqdm", "TEST-2128718904902939-011402-df2ae4462726e85ccec8e03b48838f64-669091157",  "S");
 		empresaService.saveCredencialMercadoPago(mercadoPago);
 		
-		ArrayList<Estabelecimento> estabelecimentos = new ArrayList<Estabelecimento>();
+		
 
 		for (int i = 0; i < quantDeLoop; i++) {
 			
-			Estabelecimento estabelecimento = new Estabelecimento();
+			estabelecimento = new Estabelecimento();
 			estabelecimento.setInstEstadual(null);
 			estabelecimento.setInstMunicipal(null);
 			estabelecimento.setRazao("Razão final do teste"+i);
@@ -175,7 +192,7 @@ public class ConfigAmbienteDev {
 			estabelecimentos.add(estabelecimento);
 			
 			Usuario user3 = new Usuario();
-			user3.setEmail("teste"+i+"@gmail.com");
+			user3.setEmail("test"+i+"@gmail.com");
 			user3.setCpf("39926782027");
 			user3.setCelular("83996386694");;
 			user3.setPassword("123456");

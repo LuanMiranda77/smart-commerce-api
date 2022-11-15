@@ -95,9 +95,12 @@ public class UsuarioResource implements ResourceBase<Usuario, Long> {
 	
 	
 //	Atualizar Usuario
-	@PutMapping("/{pID}")
-	public ResponseEntity<Usuario> update(@PathVariable Long pID, @Valid @RequestBody Usuario pEntity) {
-		Usuario usuarioSalvo = usuarioService.update(pEntity);
+	@PutMapping
+	public ResponseEntity<Usuario> update(@Valid @RequestBody UsuarioTO pEntity) {
+		Estabelecimento estabelecimento = estabelecimentoRepository.getById(pEntity.getEstabelecimento());
+		Usuario user = pEntity.converteParaEntidadeSemEstabelecimento(pEntity);
+		user.setEstabelecimento(estabelecimento);
+		Usuario usuarioSalvo = usuarioService.update(user);
 		return ResponseEntity.ok(usuarioSalvo);
 	}
 	
@@ -143,6 +146,13 @@ public class UsuarioResource implements ResourceBase<Usuario, Long> {
 
 	@Override
 	public ResponseEntity<Usuario> save(@Valid Usuario pEntity, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public ResponseEntity<Usuario> update(@Valid Long pID, Usuario pEntity) {
 		// TODO Auto-generated method stub
 		return null;
 	}

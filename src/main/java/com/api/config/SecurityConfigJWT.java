@@ -22,6 +22,7 @@ public class SecurityConfigJWT extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.authorizeRequests()
 //			.antMatchers(HttpMethod.GET,"api/home").permitAll()
+			.antMatchers(HttpMethod.POST,"/api/usuario/login").permitAll()
 			.antMatchers(HttpMethod.POST,"/api/usuario/recuperasenha").permitAll()
 			.antMatchers(HttpMethod.POST, "/token").permitAll()
 			.anyRequest().authenticated()
