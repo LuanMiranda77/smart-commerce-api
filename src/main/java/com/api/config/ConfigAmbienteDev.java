@@ -102,7 +102,7 @@ public class ConfigAmbienteDev {
 		estabelecimento.setInstMunicipal(null);
 		estabelecimento.setRazao("Smart commerce");
 		estabelecimento.setNome("Smart commerce");
-		estabelecimento.setCnpj("43897537000109");
+		estabelecimento.setCpf("39926782027");
 		estabelecimento.setLogradouro("endereço teste");
 		estabelecimento.setCep("58500000");
 		estabelecimento.setCidade("cidade teste");
@@ -110,6 +110,7 @@ public class ConfigAmbienteDev {
 		estabelecimento.setEmail("smartcommerce@gmail.com");
 		estabelecimento.setCelular1("83996386694");
 		estabelecimento.setRegime(Regime.ME);
+		estabelecimento.setStatus("S");
 		estabelecimentoRepository.save(estabelecimento);
 
 		Usuario user1 = new Usuario();
@@ -179,7 +180,7 @@ public class ConfigAmbienteDev {
 			estabelecimento.setCidade("cidade teste"+i);
 			estabelecimento.setUf(UF.PB);
 			estabelecimento.setEmail("teste@gmail.com");
-			estabelecimento.setCelular1("8395955999955");
+			estabelecimento.setCelular1("8333512035");
 			if(i==0) {
 				estabelecimento.setMatrizId(null);
 			}else if(i==1) {
@@ -188,6 +189,7 @@ public class ConfigAmbienteDev {
 				estabelecimento.setMatrizId("2");
 			}
 			estabelecimento.setRegime(Regime.SN);
+			estabelecimento.setStatus(i==1?"S":"N");
 			
 			estabelecimentos.add(estabelecimento);
 			

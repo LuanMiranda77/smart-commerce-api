@@ -33,7 +33,7 @@ public class UsuarioTO implements Serializable{
 	private String password;
 	private String roles;
 	private Long estabelecimento;
-//	private Date sincTemp;
+	private Date sincTemp;
 	
 	public UsuarioTO() {
 		super();

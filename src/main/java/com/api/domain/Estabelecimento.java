@@ -90,6 +90,8 @@ public class Estabelecimento {
 //	se for igual a zero é porque tem filiais se for null é porque não existe filial
 	private String matrizId;
 	
+	private String status;
+	
 	
 	
 	
