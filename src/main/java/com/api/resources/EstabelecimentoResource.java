@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.domain.Estabelecimento;
 import com.api.domain.enuns.TipoUsuario;
 import com.api.repository.EstabelecimentoRepository;
+import com.api.services.EstabelecimentoService;
 
 @RestController
 @RequestMapping("/api/estabelecimento")
@@ -29,12 +32,17 @@ public class EstabelecimentoResource implements ResourceBase<Estabelecimento, Lo
 	
 	@Autowired
 	private EstabelecimentoRepository estabelecimentoRepository;
+	
+	@Autowired
+	private EstabelecimentoService estabelecimentoService;
 
+	//	Salvar estabelecimento
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<Estabelecimento> save(@Valid Estabelecimento pEntity, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<Estabelecimento> save(@Valid @RequestBody Estabelecimento pEntity, HttpServletResponse response) {
+		Estabelecimento EmpresaSalvo = null;
+		EmpresaSalvo = estabelecimentoService.save(pEntity);
+		return ResponseEntity.status(HttpStatus.CREATED).body(EmpresaSalvo);
 	}
 
 	@Override
@@ -52,7 +60,7 @@ public class EstabelecimentoResource implements ResourceBase<Estabelecimento, Lo
 
 	public ResponseEntity<Estabelecimento> findById(Long pID) {
 		// TODO Auto-generated method stub
-		return null;
+		return ResponseEntity.ok(estabelecimentoRepository.findById(pID).get());
 	}
 
 	@Override
@@ -80,6 +88,12 @@ public class EstabelecimentoResource implements ResourceBase<Estabelecimento, Lo
 	@GetMapping
 	public List<Estabelecimento> findAllList() {
 		return estabelecimentoRepository.findAll();
+	}
+	
+	@PutMapping("/status/{id}/{status}")
+	public ResponseEntity<Estabelecimento> setStatus(@PathVariable Long id, @PathVariable String status) {
+		estabelecimentoService.updateStatus(id, status);
+		return ResponseEntity.ok(null);
 	}
 
 }

@@ -43,7 +43,7 @@ import com.api.repository.PagamentoRepository;
 import com.api.repository.PedidoRepository;
 import com.api.repository.ProdutoRepository;
 import com.api.repository.UsuarioRepository;
-import com.api.services.EmpresaService;
+import com.api.services.EstabelecimentoService;
 import com.api.services.PedidoService;
 import com.api.services.UsuarioService;
 import com.api.utils.UtilsHorasData;
@@ -76,7 +76,7 @@ public class ConfigAmbienteDev {
 	@Autowired
 	UsuarioService userService;
 	@Autowired
-	EmpresaService empresaService;
+	EstabelecimentoService empresaService;
 
 	@Bean
 	public void inserindoBanco() {
@@ -158,13 +158,6 @@ public class ConfigAmbienteDev {
 		cliente.setEnderecos(enderecos);
 
 		cliente = clienteRepository.save(cliente);
-
-		CredencialMercadoLivre mercadoLivre = new CredencialMercadoLivre(null, "2128718904902939","V7OLfmpG4XUzYnLhYmDYnK4MO6DvNqdm","Bearer APP_USR-2128718904902939-111423-265756d7711032141c81cde7e554c4ca-669091157", null, null, null,null, "TG-61a57573779d3a001ae5c57b-669091157", "S");
-		empresaService.saveCredencialMercadoLivre(mercadoLivre);
-		
-		CredencialMercadoPago mercadoPago = new CredencialMercadoPago(null, "TEST-c7bc4be8-8d01-4ac6-9b7e-ca99d41876b9","2128718904902939","V7OLfmpG4XUzYnLhYmDYnK4MO6DvNqdm", "TEST-2128718904902939-011402-df2ae4462726e85ccec8e03b48838f64-669091157",  "S");
-		empresaService.saveCredencialMercadoPago(mercadoPago);
-		
 		
 
 		for (int i = 0; i < quantDeLoop; i++) {

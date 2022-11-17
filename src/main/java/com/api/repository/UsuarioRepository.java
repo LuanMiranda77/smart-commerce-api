@@ -28,6 +28,11 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	@Query("Update Usuario user SET user.status =:status where user.id =:id")
 	public void updateStatus(@Param("id") Long id, @Param("status") StatusUsuario status);
 	
+	@Transactional
+	@Modifying(clearAutomatically = true)
+	@Query(value="update usuario set status =:status where estabelecimento_id =:id" , nativeQuery = true)
+	public void updateStatusByEstabelecimento(@Param("id") Long id, @Param("status") String status);
+	
 	@Query(value = "SELECT * FROM usuario  where estabelecimento_id=:estabelecimento", nativeQuery = true)
 	public List<Usuario> findByEstabelecimento(Long estabelecimento);
 	
