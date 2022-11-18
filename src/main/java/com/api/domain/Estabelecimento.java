@@ -29,11 +29,8 @@ public class Estabelecimento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Size( min=14, max = 14)
-	private String cnpj;
-	
-	@Size( min=11, max = 11)
-	private String cpf;
+	@Size( min=11, max = 14)
+	private String cnpjCpf;
 	
 	private String instEstadual;
 	

@@ -21,11 +21,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.domain.Estabelecimento;
-import com.api.domain.Pedido;
 import com.api.domain.Usuario;
 import com.api.domain.TO.UserLoginTO;
 import com.api.domain.TO.UsuarioTO;
-import com.api.domain.enuns.EstatusPedido;
 import com.api.domain.enuns.StatusUsuario;
 import com.api.repository.EstabelecimentoRepository;
 import com.api.repository.UsuarioRepository;
