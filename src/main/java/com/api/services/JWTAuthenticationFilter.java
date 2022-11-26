@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,13 +26,12 @@ public class JWTAuthenticationFilter extends GenericFilterBean {
 		
 		try {
 		Authentication authentication = TokenAuthenticationService
-				.getAuthentication((HttpServletRequest) request);
+				.getAuthentication((HttpServletRequest) request, (HttpServletResponse) response);
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		filterChain.doFilter(request, response);
 		} catch (ExpiredJwtException e) {
-		    System.out.println(" Token expirado "+e.getMessage());
-//		    throw new TokenExpiradoException();
+		    System.err.println(e.getMessage());
 		} 
 	}
 

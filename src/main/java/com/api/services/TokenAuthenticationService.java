@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 public class TokenAuthenticationService {
@@ -33,20 +34,27 @@ public class TokenAuthenticationService {
 				response.getWriter().write(TOKEN_PREFIX + " " + JWT);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
+				response.setStatus(403);
 				e.printStackTrace();
 			}
 		}
 		
-		static Authentication 	getAuthentication(HttpServletRequest request) {
+		static Authentication 	getAuthentication(HttpServletRequest request, HttpServletResponse response) {
 			String token = request.getHeader(HEADER_STRING);
 			
 			if (token != null) {
 				// faz parse do token
-				String user = Jwts.parser()
+				String user = null;
+				try {
+					user = Jwts.parser()
 						.setSigningKey(SECRET)
 						.parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
 						.getBody()
 						.getSubject();
+				}catch (ExpiredJwtException e) {
+					System.err.println("Token expirado "+e.getMessage());
+    				response.setStatus(403);
+    			}
 				
 				if (user != null) {
 					return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
