@@ -102,7 +102,7 @@ public class ConfigAmbienteDev {
 		estabelecimento.setInstMunicipal(null);
 		estabelecimento.setRazao("Smart commerce");
 		estabelecimento.setNome("Smart commerce");
-		estabelecimento.setCnpjCpf("39926782027");
+		estabelecimento.setCnpjCpf("35367939000173");
 		estabelecimento.setLogradouro("endereço teste");
 		estabelecimento.setCep("58500000");
 		estabelecimento.setCidade("cidade teste");
@@ -168,7 +168,7 @@ public class ConfigAmbienteDev {
 			estabelecimento.setInstMunicipal(null);
 			estabelecimento.setRazao("Razão final do teste"+i);
 			estabelecimento.setNome("Estabelecimento teste-"+i);
-			estabelecimento.setCnpjCpf("53418110000152");
+			estabelecimento.setCnpjCpf("39926782027");
 			estabelecimento.setLogradouro("endereço teste"+i);
 			estabelecimento.setCep("58500000");
 			estabelecimento.setCidade("cidade teste"+i);
