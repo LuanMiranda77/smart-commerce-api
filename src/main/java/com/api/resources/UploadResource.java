@@ -17,10 +17,12 @@ import javax.servlet.http.Part;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.domain.Categoria;
 import com.api.domain.Estabelecimento;
 import com.api.domain.Fornecedor;
 import com.api.domain.Mde;
@@ -47,9 +49,12 @@ public class UploadResource {
 	private MdeRepository mdeRepository;
 
 	@PostMapping
-	public void upload(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ResponseEntity<Object> upload(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		Part filePart;
+		ResponseEntity<Object> resp = null;
+
 //		try {
 		// obtendo o arquivo, semelhante ao getParameter
 		filePart = request.getPart("file");
@@ -147,16 +152,16 @@ public class UploadResource {
 					if (cnpjCpf.length() > 11) {
 						forn.setInstEstadual("" + objEmitente.get("IE"));
 					}
-					forn.setRazao(objEmitente.getString("xNome"));
-					forn.setNomeFatasia(
-							!objEmitente.getJSONObject("enderEmit").isNull("xFant") ? objEmitente.getString("xFant")
-									: "");
+					forn.setRazao(objEmitente.getString("xNome").toUpperCase());
+					forn.setNomeFatasia(!objEmitente.getJSONObject("enderEmit").isNull("xFant")
+							? objEmitente.getString("xFant").toUpperCase()
+							: "");
 					forn.setCep("" + objEmitente.getJSONObject("enderEmit").getInt("CEP"));
-					forn.setLogradouro(objEmitente.getJSONObject("enderEmit").getString("xLgr"));
+					forn.setLogradouro(objEmitente.getJSONObject("enderEmit").getString("xLgr").toUpperCase());
 					forn.setNumero("" + objEmitente.getJSONObject("enderEmit").get("nro"));
-					forn.setBairro(objEmitente.getJSONObject("enderEmit").getString("xBairro"));
-					forn.setCidade(objEmitente.getJSONObject("enderEmit").getString("xMun"));
-					forn.setUf(objEmitente.getJSONObject("enderEmit").getString("UF"));
+					forn.setBairro(objEmitente.getJSONObject("enderEmit").getString("xBairro").toUpperCase());
+					forn.setCidade(objEmitente.getJSONObject("enderEmit").getString("xMun").toUpperCase());
+					forn.setUf(objEmitente.getJSONObject("enderEmit").getString("UF").toUpperCase());
 					forn.setCodIbge("" + objEmitente.getJSONObject("enderEmit").getInt("cMun"));
 
 					if (!objEmitente.getJSONObject("enderEmit").isNull("fone")) {
@@ -171,13 +176,22 @@ public class UploadResource {
 					fornecedorRepository.save(forn);
 
 					Mde mde = new Mde();
-					mde.setEstabelecimento(Long.parseLong(estabelecimento));
+					Long codigo = mdeRepository.findMaxCodigoByEstabelecimento(est.getId());
+					if (codigo == null) {
+						codigo = 1l;
+					} else {
+						codigo += 1l;
+					}
+					mde.setCodigo(codigo);
+					mde.setEstabelecimento(est);
 					mde.setNumNota(Long.parseLong("" + objNfe.getJSONObject("ide").getInt("cNF")));
 					mde.setSerie(objNfe.getJSONObject("ide").getInt("serie"));
 					mde.setChaveAcesso("" + objAutorizacao.get("chNFe"));
-					mde.setDataEmissao(UtilsConvert.convertStringByDate(objNfe.getJSONObject("ide").getString("dhEmi").substring(0, 10)));
+					mde.setDataEmissao(UtilsConvert
+							.convertStringByDate(objNfe.getJSONObject("ide").getString("dhEmi").substring(0, 10)));
+					mde.setDataManifesto(mde.getDataEmissao());
 					mde.setCnpjCpf(cnpjCpf);
-					mde.setFornecedor(forn.getRazao());
+					mde.setFornecedor(forn.getRazao().toUpperCase());
 					mde.setValorTotalNota(objNfe.getJSONObject("total").getJSONObject("ICMSTot").getFloat("vNF"));
 					mde.setValorDesc(objNfe.getJSONObject("total").getJSONObject("ICMSTot").getFloat("vDesc"));
 					mde.setValorTotalNotaLiquido(
@@ -195,8 +209,8 @@ public class UploadResource {
 					mde.setNumProtocolo("" + objAutorizacao.get("nProt"));
 					mde.setStatus("M");
 
-					mdeRepository.save(mde);
-					
+					resp = ResponseEntity.ok(mdeRepository.save(mde));
+
 				}
 			}
 
@@ -206,6 +220,7 @@ public class UploadResource {
 //		} catch (Exception e) {
 //			response.sendError(400);
 //		}
+		return resp;
 
 	}
 
