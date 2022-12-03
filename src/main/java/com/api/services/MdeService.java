@@ -107,23 +107,23 @@ public class MdeService {
 					String prefix = icms + "" + i + "0";
 					
 					if (!json.getJSONObject("imposto").getJSONObject("ICMS").isNull(prefix)) {
-						prod.setCstIcms(String.valueOf(json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).get("CST")));
-						prod.setPIcms(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).isNull("pICMS") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).getFloat("pICMS"):0);
-						prod.setVIcms(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).isNull("vICMS") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).getFloat("vICMS"):0);
-						prod.setPIcmsSt(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).isNull("pICMSST") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).getFloat("pICMSST"):0);
-						prod.setVIcmsSt(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).isNull("pICMSST") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).getFloat("vICMSST"):0);
+						prod.setCstIcms("0"+String.valueOf(json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).get("CST")));
+						prod.setPorcIcms(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).isNull("pICMS") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).getFloat("pICMS"):0);
+						prod.setValorIcms(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).isNull("vICMS") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).getFloat("vICMS"):0);
+						prod.setPorcIcmsSt(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).isNull("pICMSST") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).getFloat("pICMSST"):0);
+						prod.setValorIcmsSt(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).isNull("pICMSST") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject(prefix).getFloat("vICMSST"):0);
 					} else if (!json.getJSONObject("imposto").isNull("ICMS41")) {
-						prod.setCstIcms(String.valueOf(json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").get("CST")));
-						prod.setPIcms(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").isNull("pICMS") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").getFloat("pICMS"):0);
-						prod.setVIcms(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").isNull("vICMS") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").getFloat("vICMS"):0);
-						prod.setPIcmsSt(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").isNull("pICMSST") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").getFloat("pICMSST"):0);
-						prod.setVIcmsSt(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").isNull("pICMSST") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").getFloat("vICMSST"):0);
+						prod.setCstIcms("0"+String.valueOf(json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").get("CST")));
+						prod.setPorcIcms(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").isNull("pICMS") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").getFloat("pICMS"):0);
+						prod.setValorIcms(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").isNull("vICMS") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").getFloat("vICMS"):0);
+						prod.setPorcIcmsSt(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").isNull("pICMSST") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").getFloat("pICMSST"):0);
+						prod.setValorIcmsSt(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").isNull("pICMSST") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS41").getFloat("vICMSST"):0);
 					} else if (!json.getJSONObject("imposto").isNull("ICMS651")) {
 						prod.setCstIcms(String.valueOf(json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").get("CST")));
-						prod.setPIcms(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").isNull("pICMS") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").getFloat("pICMS"):0);
-						prod.setVIcms(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").isNull("vICMS") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").getFloat("vICMS"):0);
-						prod.setPIcmsSt(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").isNull("pICMSST") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").getFloat("pICMSST"):0);
-						prod.setVIcmsSt(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").isNull("pICMSST") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").getFloat("vICMSST"):0);
+						prod.setPorcIcms(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").isNull("pICMS") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").getFloat("pICMS"):0);
+						prod.setValorIcms(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").isNull("vICMS") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").getFloat("vICMS"):0);
+						prod.setPorcIcmsSt(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").isNull("pICMSST") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").getFloat("pICMSST"):0);
+						prod.setValorIcmsSt(!json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").isNull("pICMSST") ? json.getJSONObject("imposto").getJSONObject("ICMS").getJSONObject("ICMS651").getFloat("vICMSST"):0);
 					}
 				}
 			}
@@ -131,8 +131,8 @@ public class MdeService {
 			if (!json.getJSONObject("imposto").isNull("IPI")) {
 				if (!json.getJSONObject("imposto").getJSONObject("IPI").isNull("IPITrib")) {
 					prod.setCstIpi(String.valueOf(json.getJSONObject("imposto").getJSONObject("IPI").getJSONObject("IPITrib").get("CST")));
-					prod.setPIpi(json.getJSONObject("imposto").getJSONObject("IPI").getJSONObject("IPITrib").getFloat("pIPI"));
-					prod.setVIpi(json.getJSONObject("imposto").getJSONObject("IPI").getJSONObject("IPITrib").getFloat("vIPI"));
+					prod.setPorcIpi(json.getJSONObject("imposto").getJSONObject("IPI").getJSONObject("IPITrib").getFloat("pIPI"));
+					prod.setValorIpi(json.getJSONObject("imposto").getJSONObject("IPI").getJSONObject("IPITrib").getFloat("vIPI"));
 				} 
 			}
 
@@ -143,8 +143,8 @@ public class MdeService {
 					prod.setCstPis(String.valueOf(json.getJSONObject("imposto").getJSONObject("PIS").getJSONObject("PISNT").get("CST")));
 				} else if (!json.getJSONObject("imposto").getJSONObject("PIS").isNull("PISAliq")) {
 					prod.setCstPis(String.valueOf(json.getJSONObject("imposto").getJSONObject("PIS").getJSONObject("PISAliq").get("CST")));
-					prod.setPPis(json.getJSONObject("imposto").getJSONObject("PIS").getJSONObject("PISAliq").getFloat("pPIS"));
-					prod.setVPis(json.getJSONObject("imposto").getJSONObject("PIS").getJSONObject("PISAliq").getFloat("vPIS"));
+					prod.setPorcPis(json.getJSONObject("imposto").getJSONObject("PIS").getJSONObject("PISAliq").getFloat("pPIS"));
+					prod.setValorPis(json.getJSONObject("imposto").getJSONObject("PIS").getJSONObject("PISAliq").getFloat("vPIS"));
 				}
 
 			}
@@ -156,8 +156,8 @@ public class MdeService {
 					prod.setCstPis(String.valueOf(json.getJSONObject("imposto").getJSONObject("COFINS").getJSONObject("COFINSNT").get("CST")));
 				} else if (!json.getJSONObject("imposto").getJSONObject("COFINS").isNull("COFINSAliq")) {
 					prod.setCstCofins(String.valueOf(json.getJSONObject("imposto").getJSONObject("COFINS").getJSONObject("COFINSAliq").get("CST")));
-					prod.setPPis(json.getJSONObject("imposto").getJSONObject("COFINS").getJSONObject("COFINSAliq").getFloat("pCOFINS"));
-					prod.setVPis(json.getJSONObject("imposto").getJSONObject("COFINS").getJSONObject("COFINSAliq").getFloat("vCOFINS"));
+					prod.setPorcPis(json.getJSONObject("imposto").getJSONObject("COFINS").getJSONObject("COFINSAliq").getFloat("pCOFINS"));
+					prod.setValorPis(json.getJSONObject("imposto").getJSONObject("COFINS").getJSONObject("COFINSAliq").getFloat("vCOFINS"));
 				}
 			}
 			

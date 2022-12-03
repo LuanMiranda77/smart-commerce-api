@@ -26,22 +26,22 @@ public class ProdutoTO {
 	float vTotTrib;
 	
 	String cstIcms;
-	float pIcms;
-	float vIcms;
-	float pIcmsSt;
-	float vIcmsSt;
+	float porcIcms;
+	float valorIcms;
+	float porcIcmsSt;
+	float valorIcmsSt;
 	
 	String cstIpi;
-	float pIpi;
-	float vIpi;
+	float porcIpi;
+	float valorIpi;
 	
 	String cstPis;
-	float pPis;
-	float vPis;
+	float porcPis;
+	float valorPis;
 	
 	String cstCofins;
-	float pCofins;
-	float vCofins;
+	float porcCofins;
+	float valorCofins;
 	
 	
 	
