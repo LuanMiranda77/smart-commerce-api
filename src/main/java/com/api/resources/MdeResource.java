@@ -99,7 +99,6 @@ public class MdeResource implements ResourceBase<Mde, Long> {
 			xml = new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8);
 //		System.err.println(xml);
 			JSONObject json  = XML.toJSONObject(xml).getJSONObject("nfeProc").getJSONObject("NFe").getJSONObject("infNFe");
-			System.out.println(json);
 			list = service.getProdutosXml(json);
 			return list;
 		} catch (Exception e) {

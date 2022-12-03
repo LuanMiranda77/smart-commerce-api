@@ -5,20 +5,21 @@ import lombok.Data;
 @Data
 public class ProdutoTO {
 	
-	Long cProd;
-	String xProd;
-	String cEAN;
+	Long codigo;
+	String nome;
+	String ean;
 	String ncm;
 	String cest;
 	String cfop;
-	String uCom;
-	double qCom;
-	float vProd;
-	String cEANTrib;
-	String uTrib;
-	Double qTrib;
-	float vDesc;
-	float vOutro;
+	String uniCom;
+	double quantCom;
+	float valorUnit;
+	float valorTotal;
+	String eanTrib;
+	String uniTrib;
+	Double quantTrib;
+	float desc;
+	float outro;
 	
 //	impostos
 	
@@ -26,7 +27,9 @@ public class ProdutoTO {
 	
 	String cstIcms;
 	float pIcms;
-	float vpIcms;
+	float vIcms;
+	float pIcmsSt;
+	float vIcmsSt;
 	
 	String cstIpi;
 	float pIpi;
