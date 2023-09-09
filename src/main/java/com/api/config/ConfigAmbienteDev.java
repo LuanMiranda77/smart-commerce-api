@@ -22,6 +22,7 @@ import com.api.domain.EnderecoEntrega;
 import com.api.domain.Estabelecimento;
 import com.api.domain.ImagemProduto;
 import com.api.domain.ItemPedido;
+import com.api.domain.Mde;
 import com.api.domain.Pagamento;
 import com.api.domain.Pedido;
 import com.api.domain.Produto;
@@ -39,6 +40,7 @@ import com.api.repository.CategoriaRepository;
 import com.api.repository.ClienteRepository;
 import com.api.repository.EstabelecimentoRepository;
 import com.api.repository.ImagemProdutoRepository;
+import com.api.repository.MdeRepository;
 import com.api.repository.PagamentoRepository;
 import com.api.repository.PedidoRepository;
 import com.api.repository.ProdutoRepository;
@@ -77,6 +79,8 @@ public class ConfigAmbienteDev {
 	UsuarioService userService;
 	@Autowired
 	EstabelecimentoService empresaService;
+	@Autowired
+	MdeRepository mdeRepository;
 
 	@Bean
 	public void inserindoBanco() {
@@ -88,6 +92,7 @@ public class ConfigAmbienteDev {
 		List<Pedido> pedidos = new ArrayList<>();
 		List<Estabelecimento> estabelecimentos = new ArrayList<>();
 		List<Endereco> enderecos = new ArrayList<>();
+		List<Mde> mdes = new ArrayList<>();
 
 // 		setando dados dos usuarios		
 		Usuario user;
@@ -96,7 +101,7 @@ public class ConfigAmbienteDev {
 		Pedido pedido = null;
 
 		Random gerador = new Random();
-		
+
 		Estabelecimento estabelecimento = new Estabelecimento();
 		estabelecimento.setInstEstadual(null);
 		estabelecimento.setInstMunicipal(null);
@@ -117,7 +122,8 @@ public class ConfigAmbienteDev {
 		Usuario user1 = new Usuario();
 		user1.setEmail("agilityecommerce@gmail.com");
 		user1.setCpf("39926782027");
-		user1.setCelular("83996386694");;
+		user1.setCelular("83996386694");
+		;
 		user1.setPassword("123456");
 		user1.setNome("ADMIN");
 		user1.setRoles("1-2-3");
@@ -153,59 +159,58 @@ public class ConfigAmbienteDev {
 		endereco.setUf(UF.PB);
 		endereco.setPadrao("S");
 
-		
 		enderecos.add(endereco);
 
 		cliente.setEnderecos(enderecos);
 
 		cliente = clienteRepository.save(cliente);
-		
 
 		for (int i = 0; i < quantDeLoop; i++) {
-			
+
 			estabelecimento = new Estabelecimento();
 			estabelecimento.setInstEstadual(null);
 			estabelecimento.setInstMunicipal(null);
-			estabelecimento.setRazao("Razão final do teste"+i);
-			estabelecimento.setNome("Estabelecimento teste-"+i);
+			estabelecimento.setRazao("Razão final do teste" + i);
+			estabelecimento.setNome("Estabelecimento teste-" + i);
 			estabelecimento.setCnpjCpf("39926782027");
-			estabelecimento.setLogradouro("endereço teste"+i);
+			estabelecimento.setLogradouro("endereço teste" + i);
 			estabelecimento.setCep("58500000");
-			estabelecimento.setCidade("cidade teste"+i);
+			estabelecimento.setCidade("cidade teste" + i);
 			estabelecimento.setUf(UF.PB);
 			estabelecimento.setEmail("teste@gmail.com");
 			estabelecimento.setCelular1("83998365594");
 			estabelecimento.setFoneFixo("8333512332");
-			if(i==0) {
+			if (i == 0) {
 				estabelecimento.setMatrizId(null);
-			}else if(i==1) {
+			} else if (i == 1) {
 				estabelecimento.setMatrizId("0");
-			}else {
+			} else {
 				estabelecimento.setMatrizId("2");
 			}
 			estabelecimento.setRegime(Regime.SN);
-			estabelecimento.setStatus(i==1?"S":"N");
-			
+			estabelecimento.setStatus(i == 1 ? "S" : "N");
+
 			estabelecimentos.add(estabelecimento);
-			
+
 			Usuario user3 = new Usuario();
-			user3.setEmail("test"+i+"@gmail.com");
+			user3.setEmail("test" + i + "@gmail.com");
 			user3.setCpf("39926782027");
-			user3.setCelular("83996386694");;
+			user3.setCelular("83996386694");
+			;
 			user3.setPassword("123456");
-			user3.setNome("TESTE USER"+i);
+			user3.setNome("TESTE USER" + i);
 			user3.setRoles("1-2-3");
 			user3.setStatus(StatusUsuario.S);
 //			new BCryptPasswordEncoder().encode("123456")
-			user3.setCargo(i==1?"G":i==2?"C":"E");
+			user3.setCargo(i == 1 ? "G" : i == 2 ? "C" : "E");
 			estabelecimento = new Estabelecimento();
 			estabelecimento.setId(1L);
 			user3.setEstabelecimento(estabelecimento);
-			
+
 			users.add(user3);
 //			user = userRepository.save(user3);
-			
-			categoria = new Categoria(i + 1l, "categoria-test-" + (i+1), "MLB271599", "MLB442408");
+
+			categoria = new Categoria(i + 1l, "categoria-test-" + (i + 1), "MLB271599", "MLB442408");
 			categorias.add(categoria);
 
 			BigDecimal b = new BigDecimal(1.8);
@@ -307,7 +312,27 @@ public class ConfigAmbienteDev {
 					itens.getQuantidadeVendida() + itens2.getQuantidadeVendida() + itens3.getQuantidadeVendida()))));
 
 			pedidos.add(pedido);
-			
+
+			Mde nota = new Mde();
+			nota.setNumNota(55l);
+			nota.setSerie(1);
+			estabelecimento.setId(1l);
+			nota.setEstabelecimento(estabelecimento);
+			nota.setChaveAcesso("25230308592396000115550010004000801645944053");
+			nota.setDataEmissao(date);
+			nota.setDataManifesto(date);
+			nota.setFornecedor("Jurandi");
+			nota.setCnpjCpf("32510485000156");
+			nota.setValorTotalNota(0.00f);
+			nota.setValorCofins(0.00f);
+			nota.setValorFrete(0.00f);
+			nota.setValorIcms(0.00f);
+			nota.setValorIpi(0.00f);
+			nota.setValorTotalNotaLiquido(1500.00f);
+			nota.setValorTotalNota(1500.00f);
+			nota.setIncluida(i < 5 ? "S" : "N");
+			nota.setStatus(i < 5 ? "M" : i < 8 ?"A": "N");
+			mdes.add(nota);
 
 		}
 
@@ -316,6 +341,7 @@ public class ConfigAmbienteDev {
 		categoriaRepository.saveAll(categorias);
 		produtoRepository.saveAll(produtos);
 		userRepository.saveAll(users);
+		mdeRepository.saveAll(mdes);
 		pedidos.forEach(e -> pedidoService.save(e));
 
 	}
