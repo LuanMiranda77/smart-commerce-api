@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.api.domain.Categoria;
 import com.api.domain.Cliente;
+import com.api.domain.ConfigModulo;
 import com.api.domain.CredencialMercadoLivre;
 import com.api.domain.CredencialMercadoPago;
 import com.api.domain.Endereco;
@@ -38,6 +39,7 @@ import com.api.domain.enuns.TipoPagamento;
 import com.api.domain.enuns.UF;
 import com.api.repository.CategoriaRepository;
 import com.api.repository.ClienteRepository;
+import com.api.repository.ConfigModuloRepository;
 import com.api.repository.EstabelecimentoRepository;
 import com.api.repository.ImagemProdutoRepository;
 import com.api.repository.MdeRepository;
@@ -101,6 +103,9 @@ public class ConfigAmbienteDev {
 		Pedido pedido = null;
 
 		Random gerador = new Random();
+		
+		ConfigModulo config = new ConfigModulo();
+		config.setNumCasaDecimais(0);
 
 		Estabelecimento estabelecimento = new Estabelecimento();
 		estabelecimento.setInstEstadual(null);
@@ -117,6 +122,7 @@ public class ConfigAmbienteDev {
 		estabelecimento.setFoneFixo("8333512332");
 		estabelecimento.setRegime(Regime.ME);
 		estabelecimento.setStatus("S");
+		estabelecimento.setConfig(config);
 		estabelecimentoRepository.save(estabelecimento);
 
 		Usuario user1 = new Usuario();
@@ -166,6 +172,9 @@ public class ConfigAmbienteDev {
 		cliente = clienteRepository.save(cliente);
 
 		for (int i = 0; i < quantDeLoop; i++) {
+			
+			config = new ConfigModulo();
+			config.setNumCasaDecimais(1);
 
 			estabelecimento = new Estabelecimento();
 			estabelecimento.setInstEstadual(null);
@@ -189,7 +198,7 @@ public class ConfigAmbienteDev {
 			}
 			estabelecimento.setRegime(Regime.SN);
 			estabelecimento.setStatus(i == 1 ? "S" : "N");
-
+			estabelecimento.setConfig(config);
 			estabelecimentos.add(estabelecimento);
 
 			Usuario user3 = new Usuario();
@@ -228,6 +237,10 @@ public class ConfigAmbienteDev {
 			produto.setImage("C:\\Users\\luanp\\Pictures\\logox2.jpg");
 			produto.setEstabelecimento(est);
 			produto.setCategoria(categoria);
+			produto.setDtUltimaCompra(new Date());
+			produto.setNomeForn("ALOCA DO FUMO LTDA");
+			produto.setNcm("32091010");
+			produto.setCstIcms("102");
 			produtos.add(produto);
 			produto.setId(i + 1l);
 

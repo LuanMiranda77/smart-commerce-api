@@ -59,22 +59,29 @@ public class Produto {
 	
     @JsonFormat(pattern="yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
-    private Date dtCreate;
+    private Date dtCreate = new Date();
     
     @JsonFormat(pattern="yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
-    private Date dtUpdate;
+    private Date dtUpdate = new Date();
     
     @JsonFormat(pattern="yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date dtVencimento;
     
+	private String nomeForn;
+    
+    @JsonFormat(pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date dtUltimaCompra;
+    
+    
     @Size(max=3)
-    private String unid;
+    private String unid="UN";
     
-    private Integer fatorConversao;
+    private Float fatorConversao=1.0F;
     
-	private Float saldoMinimo;
+	private Float saldoMinimo=1.0F;
 	
 	private Float quantMinAtacado;
 	

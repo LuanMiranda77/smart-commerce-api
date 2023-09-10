@@ -9,6 +9,6 @@ import com.api.domain.ConfigModulo;
 @Repository
 public interface ConfigModuloRepository extends JpaRepository<ConfigModulo, Long> {
 	
-	public ConfigModulo findByEstabelecimento(Long estabelecimento);
+//	public ConfigModulo findByEstabelecimento(Long estabelecimento);
 
 }

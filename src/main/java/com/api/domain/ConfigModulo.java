@@ -21,43 +21,40 @@ public class ConfigModulo {
 	
 	// modo geral
 	@Size(max = 1)
-	private String orcamento;
+	private String orcamento="S";
 	@Size(max = 1)
-	private String pedido;
+	private String pedido="S";
 	@Size(max = 1)
-	private String filial;
+	private String filial="N";
 	@Size(max = 1)
-	private String prevenda;
+	private String prevenda="N";
 
     // modo fiscal
-	private String nfe;
+	private String nfe="S";
 	@Size(max = 1)
-	private String nfce;
+	private String nfce="S";
 	@Size(max = 1)
-	private String mdfe;
+	private String mdfe="S";
 	@Size(max = 1)
-	private String sat;
-	@Size(max = 1)
-	private String mde;
+	private String sat="N";
+
 
     // modo financeiro
 	@Size(max = 1)
-	private String contas;
+	private String contas="S";
 	@Size(max = 1)
-	private String planoContas;
+	private String planoContas="N";
 	@Size(max = 1)
-	private String controleCaixa;
+	private String controleCaixa="N";
 
     // modo estoque
 	@Size(max = 1)
-	private String transferenciaEstoque;
+	private String transferenciaEstoque="N";
+	
+	private Integer numCasaDecimais=1;
 
     // integrações
 	@Size(max = 1)
-	private String balanca;
-	
-    Long estabelecimento;
+	private String balanca="N";
     
-	
-
 }
