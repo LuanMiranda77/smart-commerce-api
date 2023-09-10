@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.api.domain.ItemMarkeplace;
 import com.api.domain.Pedido;
 import com.api.domain.Produto;
+import com.api.domain.Usuario;
 import com.api.domain.enuns.EstatusPedido;
 import com.api.repository.ItemMarketRepository;
 import com.api.repository.ProdutoRepository;
@@ -43,9 +44,6 @@ public class ProdutoResource implements ResourceBase<Produto, Long>{
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
-	
-	@Autowired
-	private ItemMarketRepository itemMarkeplaceRepository;
 
 
 //	Salvar Produto
@@ -62,20 +60,6 @@ public class ProdutoResource implements ResourceBase<Produto, Long>{
 		return ResponseEntity.status(HttpStatus.CREATED).body(produtoSalvo);
 	}
 	
-//	Salvar item Markewt
-	@PostMapping("/item-market")
-	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<ItemMarkeplace> saveItemMarket(@Valid @RequestBody ItemMarkeplace pEntity, HttpServletResponse response) {
-		ItemMarkeplace produtoSalvo = null;
-		try {
-			produtoRepository.updateIDMarket(pEntity.getProduto().getId(), pEntity.getIdMarkeplace());
-			produtoSalvo = itemMarkeplaceRepository.save(pEntity);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return ResponseEntity.status(HttpStatus.CREATED).body(produtoSalvo);
-	}
 
 //	Atualizar entidade 
 	@PutMapping("/{pID}")
@@ -100,7 +84,7 @@ public class ProdutoResource implements ResourceBase<Produto, Long>{
 //	Filtro por ID
 	@GetMapping("/busca/{ptitulo}")
 	public ResponseEntity<List<Produto>> findByTitulo(@PathVariable String ptitulo) {
-		List<Produto> lista = produtoRepository.findProdutoByTituloContains(ptitulo);
+		List<Produto> lista = produtoRepository.findProdutoByNomeContains(ptitulo);
 		
 		return ResponseEntity.ok(lista);
 	}
@@ -110,18 +94,16 @@ public class ProdutoResource implements ResourceBase<Produto, Long>{
 	public void deleteAll( @RequestBody List<Produto> pList) {
 		produtoRepository.deleteAll(pList);
 	}
-	
-//	Atualizar pedido
-	@PutMapping("/update-market/{id}/{code}")
-	public ResponseEntity<Pedido> updateStatus(@PathVariable Long id, @PathVariable String code) {
-		produtoRepository.updateIDMarket(id, code);
-		return ResponseEntity.ok(null);
-	}
 
 	
 	@GetMapping("/filter/{tipoFilter}&{dados}")
 	public List<Produto> findFilterProdutos(@PathVariable String tipoFilter, @PathVariable String dados){
 		return produtoService.findFilterProdutos(tipoFilter, dados);
+	}
+	
+	@GetMapping("/estabelecimento/{pID}")
+	public List<Produto> findByEstabelecimento(@PathVariable Long pID) {
+		return produtoRepository.findByEstabelecimento(pID);
 	}
 	
 	@GetMapping("/categoria/{id}")

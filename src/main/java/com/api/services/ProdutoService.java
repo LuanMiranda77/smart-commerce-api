@@ -21,35 +21,22 @@ public class ProdutoService {
 	private ProdutoRepository produtoRepository;
 	
 	@Autowired
-	private ImagemProdutoRepository imagemProdutoRepository;
-	
-	@Autowired
 	private ProdutoQueryImpl produtoQueryImpl;
 
 	public Produto save(Produto pEntity){
-		if(produtoRepository.existsByCodigoBarras(pEntity.getCodigoBarras())) {
+		if(produtoRepository.existsByEan(pEntity.getEan())) {
 			throw new ItemExistException();
 		}
-		String [] vetor = pEntity.getDescricao().split("|");
-		pEntity.setDescricao(vetor[0]);
-		
 		Produto produtoSalvo = produtoRepository.save(pEntity);
-		System.err.println(pEntity.getDescricao());
-		pEntity.getImagens().forEach(e -> System.err.println(e));
 		return produtoSalvo;
 	}
 
 	public Produto update(Long pID, Produto pEntity) {
 		Produto produtoSalvo = produtoRepository.findById(pID).get();
 		
-		List<ImagemProduto>ListaForDel = produtoSalvo.getImagens().stream()
-					.filter(e -> pEntity.getImagens()
-					.contains(e.getId())!=true).collect(Collectors.toList());
-		
 		BeanUtils.copyProperties(pEntity, produtoSalvo,"id");
 		produtoRepository.save(produtoSalvo); 
 		produtoSalvo.setId(pEntity.getId());
-		imagemProdutoRepository.deleteAll(ListaForDel);
 		return produtoSalvo;
 	}
 	

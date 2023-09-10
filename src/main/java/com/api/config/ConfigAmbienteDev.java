@@ -55,7 +55,7 @@ import com.api.utils.UtilsHorasData;
 public class ConfigAmbienteDev {
 
 	@Transient
-	private int quantDeLoop = 10;
+	private int quantDeLoop = 100;
 
 	@Autowired
 	ProdutoRepository produtoRepository;
@@ -214,34 +214,19 @@ public class ConfigAmbienteDev {
 			categorias.add(categoria);
 
 			BigDecimal b = new BigDecimal(1.8);
+			Estabelecimento est = estabelecimento;
+			est.setId(1L);
 			produto = new Produto();
-			produto.setCodigoBarras("154587878" + i + 1);
-			produto.setTitulo("item-" + i + 1);
+			produto.setEan("789654789123");
+			produto.setNome("item-" + i + 1);
+			produto.setCodigo( (long) (i + 1));
+			produto.setUnid("UND");
 			produto.setPrecoAtacado(b);
-			produto.setPrecoVarejo(b.multiply(new BigDecimal(2)));
-			produto.setQuantidade(i);
-			produto.setPeso("1");
-			produto.setComprimento("20");
-			produto.setLargura("20");
-			produto.setAltura("20");
-			produto.setDescricao("Descrição" + i + 1);
-			produto.setEstrelas(gerador.nextInt(5));
-			produto.getImagens().add(new ImagemProduto(null,
-					"https://a-static.mlcdn.com.br/1500x1500/relogio-binbond-de-luxo-moda-esporte-ouro-relogios-pulso-relogio-casual-cronografo-sem-genero/classicosrelogioseacessorios/crabinbondprata/b2ba92809443451bf0d1e16d28003a1c.jpg",
-					"1fdfd51fdf", "nome" + i + 1, 55d));
-			produto.getImagens()
-					.add(new ImagemProduto(null,
-							"https://images-americanas.b2w.io/produtos/01/00/img/79597/8/79597872_1GG.jpg",
-							"1fdfd51fdf", "nome" + i + 1, 55d));
-			produto.getImagens().add(new ImagemProduto(null,
-					"https://d3ugyf2ht6aenh.cloudfront.net/stores/386/761/products/dsc08819-edit-gold11-07a7861b1e1cf702ec16186076742287-480-0.jpg",
-					"1fdfd51fdf", "nome" + i + 1, 55d));
-			produto.getImagens()
-					.add(new ImagemProduto(null, "https://m.media-amazon.com/images/I/61QHCYJIDsL._AC_SX522_.jpg",
-							"1fdfd51fdf", "nome" + i + 1, 55d));
-			produto.getImagens().add(new ImagemProduto(null,
-					"https://images-soubarato.b2w.io/produtos/3029006799/imagens/2020-moda-masculina-minimalista-ultra-fino-relogios-simples-aco-homens-de-negocios-inoxidavel-mesh-belt-relogio-de-quartzo-relogio-masculino/3029006799_1_large.jpg",
-					"1fdfd51fdf", "nome" + i + 1, 55d));
+			produto.setPrecoCusto(b.multiply(new BigDecimal(2)));
+			produto.setPrecoVenda(b.multiply(new BigDecimal(2)));
+			produto.setSaldo((float) i);
+			produto.setImage("C:\\Users\\luanp\\Pictures\\logox2.jpg");
+			produto.setEstabelecimento(est);
 			produto.setCategoria(categoria);
 			produtos.add(produto);
 			produto.setId(i + 1l);
@@ -308,7 +293,7 @@ public class ConfigAmbienteDev {
 			pedido.setPagamento(pagamento);
 			pedido.setProdutos(itensPedido);
 
-			pedido.setValorTotal((produto.getPrecoVarejo().multiply(new BigDecimal(
+			pedido.setValorTotal((produto.getPrecoVenda().multiply(new BigDecimal(
 					itens.getQuantidadeVendida() + itens2.getQuantidadeVendida() + itens3.getQuantidadeVendida()))));
 
 			pedidos.add(pedido);
